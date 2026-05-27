@@ -1,40 +1,25 @@
 #include <Arduino.h>
 #include <FastLED.h>
-
-#include "config.h"
 #include "deck_state.h"
+#include "config.h"
+
+
+void setDeckColor();
 
 CRGB leds[NUM_LEDS];
 
 void initLeds()
 {
-    FastLED.addLeds<WS2811, LED_PIN, RGB>(
+    FastLED.addLeds<
+        WS2811,
+        LED_PIN,
+        BRG
+    >(
         leds,
         NUM_LEDS
     );
 
     FastLED.setBrightness(80);
-}
-
-void setDeckColor()
-{
-    CRGB deckColor;
-
-    if (currentDeck == DECK_A)
-    {
-        deckColor = CRGB::Blue;
-    }
-    else
-    {
-        deckColor = CRGB::Red;
-    }
-
-    for (int i = 0; i < NUM_LEDS; i++)
-    {
-        leds[i] = deckColor;
-    }
-
-    FastLED.show();
 }
 
 void bootAnimation()
@@ -57,8 +42,29 @@ void bootAnimation()
 
         FastLED.show();
 
-        delay(200);
+        delay(180);
     }
 
     setDeckColor();
+}
+
+void setDeckColor()
+{
+    CRGB deckColor;
+
+    if (currentDeck == DECK_A)
+    {
+        deckColor = CRGB::Blue;
+    }
+    else
+    {
+        deckColor = CRGB::Red;
+    }
+
+    for (int i = 0; i < NUM_LEDS; i++)
+    {
+        leds[i] = deckColor;
+    }
+
+    FastLED.show();
 }

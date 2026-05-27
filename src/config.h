@@ -9,7 +9,7 @@
 #define ENCODER_S1 32
 #define ENCODER_S2 33
 
-#define LED_PIN 27
+#define LED_PIN 4
 #define NUM_LEDS 13
 
 // =====================

@@ -1,5 +1,5 @@
 #include <Arduino.h>
-
+#include "shift.h"
 #include "config.h"
 #include "shift.h"
 #include "jog.h"
@@ -32,5 +32,10 @@ void setup()
 void loop()
 {
     updateShift();
+
     updateJog();
+
+    updateLeds(
+        isShiftPressed()
+    );
 }

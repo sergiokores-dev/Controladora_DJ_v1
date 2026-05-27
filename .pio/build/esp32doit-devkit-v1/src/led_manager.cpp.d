@@ -283,4 +283,4 @@
  .pio/libdeps/esp32doit-devkit-v1/FastLED/src/platforms/ui_defs.h \
  .pio/libdeps/esp32doit-devkit-v1/FastLED/src/sensors/button.h \
  .pio/libdeps/esp32doit-devkit-v1/FastLED/src/sensors/digital_pin.h \
- src/deck_state.h src/config.h
+ src/config.h src/deck_state.h

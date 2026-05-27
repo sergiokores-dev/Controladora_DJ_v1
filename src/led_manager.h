@@ -7,3 +7,5 @@ void bootAnimation();
 void setDeckColor();
 
 void updateLeds(bool shiftPressed);
+
+void moveJogPosition(int direction);

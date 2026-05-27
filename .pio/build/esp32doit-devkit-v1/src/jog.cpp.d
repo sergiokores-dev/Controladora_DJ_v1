@@ -133,4 +133,4 @@
  C:/Users/klingoww/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/soc/esp32/spiram.h \
  C:/Users/klingoww/.platformio/packages/framework-arduinoespressif32/cores/esp32/io_pin_remap.h \
  C:/Users/klingoww/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h \
- src/config.h src/shift.h
+ src/config.h src/shift.h src/led_manager.h

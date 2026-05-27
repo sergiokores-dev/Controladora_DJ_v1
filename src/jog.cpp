@@ -2,7 +2,7 @@
 
 #include "config.h"
 #include "shift.h"
-
+#include "led_manager.h"
 void updateJog()
 {
     static String encoderSequence = "";
@@ -29,6 +29,7 @@ void updateJog()
             else
             {
                 Serial.println("JOG RIGHT");
+                moveJogPosition(1);
             }
 
             encoderSequence = "";
@@ -44,6 +45,7 @@ void updateJog()
             else
             {
                 Serial.println("JOG LEFT");
+                moveJogPosition(-1);
             }
 
             encoderSequence = "";

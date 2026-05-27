@@ -4,9 +4,44 @@
 #include "config.h"
 #include "deck_state.h"
 
+//void setDeckColor();
+
 CRGB leds[NUM_LEDS];
 
-void setDeckColor();
+// =====================
+// JOG ANIMATION
+// =====================
+
+int jogPosition = 0;
+ 
+int ledMap[11] =
+{
+    0,1,2,3,4,5,10,9,8,7,6
+};
+
+
+void setDeckColor()
+{
+    CRGB deckColor;
+
+    if (currentDeck == DECK_A)
+    {
+        deckColor = CRGB::Green;
+    }
+    else
+    {
+        deckColor = CRGB::Red;
+    }
+
+    for (int i = 0; i < NUM_LEDS; i++)
+    {
+        leds[i] = deckColor;
+    }
+
+    FastLED.show();
+}
+
+
 
 void initLeds()
 {
@@ -21,6 +56,8 @@ void initLeds()
 
     FastLED.setBrightness(80);
 }
+
+
 
 void bootAnimation()
 {
@@ -42,32 +79,29 @@ void bootAnimation()
 
         FastLED.show();
 
-        delay(180);
+        delay(100);
     }
 
     setDeckColor();
 }
 
-void setDeckColor()
+
+
+void moveJogPosition(int direction)
 {
-    CRGB deckColor;
+    jogPosition += direction;
 
-    if (currentDeck == DECK_A)
+    if (jogPosition >= NUM_LEDS)
     {
-        deckColor = CRGB::Blue;
-    }
-    else
-    {
-        deckColor = CRGB::Red;
+        jogPosition = 0;
     }
 
-    for (int i = 0; i < NUM_LEDS; i++)
+    if (jogPosition < 0)
     {
-        leds[i] = deckColor;
+        jogPosition = NUM_LEDS - 1;
     }
-
-    FastLED.show();
 }
+
 
 void updateLeds(bool shiftPressed)
 {
@@ -76,7 +110,10 @@ void updateLeds(bool shiftPressed)
     static int fadeDirection = 1;
     static bool lastShiftState = false;
 
-    // SHIFT PRESSIONADO
+    // =========================
+    // SHIFT MODE
+    // =========================
+
     if (shiftPressed)
     {
         if (millis() - lastUpdate > 20)
@@ -110,16 +147,28 @@ void updateLeds(bool shiftPressed)
         }
     }
 
-    // SHIFT SOLTO
+    // =========================
+    // NORMAL MODE
+    // =========================
+
     else
     {
-        // acabou de soltar
+        // acabou de soltar SHIFT
         if (lastShiftState)
         {
             setDeckColor();
         }
+
+        // cor base do deck
+        setDeckColor();
+
+        // marcador do jog
+        leds[
+            ledMap[jogPosition]
+        ] = CRGB::White;
+
+        FastLED.show();
     }
 
-    // salva estado anterior
     lastShiftState = shiftPressed;
 }

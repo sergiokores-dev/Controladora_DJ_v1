@@ -10,7 +10,7 @@
 #define ENCODER_S2 33
 
 #define LED_PIN 4
-#define NUM_LEDS 13
+#define NUM_LEDS 11
 
 // =====================
 // TIMERS
